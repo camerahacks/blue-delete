@@ -107,9 +107,7 @@ component {
 
                 for ( key in pendingDeletes ) {
 
-                    id = '1857963460921012720'
-
-                    deleteTweet = twitterAPI.deleteTweet(id)
+                    deleteTweet = twitterAPI.deleteTweet(key)
 
                     count = count + 1
 
