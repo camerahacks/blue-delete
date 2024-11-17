@@ -174,13 +174,19 @@ component  hint="Handles oAuth authentication" displayname="oAuth API"  output="
         //send the request to api
         apiResponse = httpService.send().getPrefix()
 
-        if(apiResponse.status_code==200){
-            apiResponse = deserializeJSON(apiResponse.filecontent)
+        if( apiResponse.status_code==200 ){
+
+            returnText.text = deserializeJSON(apiResponse.filecontent)
+            returnText.status_code = 200
+
         }else{
-            apiResponse = ''
+
+            returnText.text = apiResponse.filecontent
+            returnText.status_code = apiResponse.status_code
+
         }
 
-        return apiResponse
+        return returnText
     }
 
 }

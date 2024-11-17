@@ -6,6 +6,8 @@ If this script was useful to you and you would like to support my work, you can 
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/J3J6BINRX)
 
+**Please proceed with caution.** There is no going back after you delete your Tweets. Do it at your own risk!
+
 ## Download your Twitter/X Archive
 
 The first thing you should do is request your Twitter/X archive. Blue Delete uses the archive files to know which Tweets to delete. It usually takes 24 hours for Twitter/X to get your archive ready.
@@ -19,6 +21,10 @@ You can so by going to ```Settings and privacy > Your account > Download and arc
 Here's how I used my Raspberry Pi to delete all my Tweets.
 
 This script requires access to the Twitter API to delete your tweets. You can sign up for the free version through [Twitter's developer portal](https://developer.x.com)
+
+**BIG OVERSIGHT** Looks like the API there's a limit of 50 deletes per 24 hours. I'll have to find a better way...
+
+VaenaVgh5q5ih7kvyVjgtg
 
 You will also need to install [CommandBox](https://commandbox.ortusbooks.com/setup/installation) to your Raspberry Pi (or any other Linux computer). CommandBox allows you to run a server or a task based on the powerful CFML web scripting language. This script does not require to run a server locally.
 

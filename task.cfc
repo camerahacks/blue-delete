@@ -14,11 +14,11 @@ component {
 
     function run(){
 
-        print.line('Welcome to the Tweet deleting tasks. This script requires the Twitter API keys and secrets. Make sure to check out the instructions at www.dphacks.com')
+        print.greenLine('Welcome to Blue  Delete! deleting tasks. This script requires the Twitter API keys and secrets. Make sure to check out the instructions at www.dphacks.com')
         print.line()
 
         // load the twitter API
-        tweeterAPI = new twitterEngine()
+        twitterAPI = new twitterEngine()
 
         // read the json file with all the tweets
         tweetArchive = fileRead( 'tweets.js' )
@@ -71,7 +71,7 @@ component {
         print.line( 'This will take approximately '&round(calculateTime)&' hours' ).toConsole()
         print.line()
 
-        print.line( 'Do you want to continue and *delete* all your Tweets?' )
+        print.redLine( 'Do you want to continue and *delete* all your Tweets?' )
 
         if( confirm( 'There is no going back [y/n]' ) ){
 
@@ -89,8 +89,15 @@ component {
 
         // The API free tier limits 50 delete calls per 15 minutes
         // So, only delete 50 tweets at a time
+
+        // currentCount will keep track of how many tweets have been deleted.
         currentCount = 0
+
+        // Count will keep track of how many API calls have been made.
         count = 0
+
+        // count fails so the script stops after a number of fails
+        countFail = 0
         
         try {
             
@@ -100,13 +107,43 @@ component {
 
                 for ( key in pendingDeletes ) {
 
-                    tracking[key] = 'deleted'
-                    
+                    id = '1857963460921012720'
+
+                    deleteTweet = twitterAPI.deleteTweet(id)
+
                     count = count + 1
 
-                    currentCount = currentCount + 1
+                    if ( deleteTweet.status_code==200 ) {
+                        
+                        tracking[key] = 'deleted'
 
-                    // print.greenLine( 'Deleted Tweet: '&key ).toConsole()
+                        currentCount = currentCount + 1
+
+                    } else if ( deleteTweet.status_code==429 ) {
+
+                        // Too many attempts, wait 15 minutes
+                        progressBarGeneric.clear()
+
+                        print.redLine('Too many requests, waiting 15 minutes...').toConsole()
+                        
+                        sleep(901000)
+                        
+                    } else {
+                        
+                        print.redLine(deleteTweet.text).toConsole()
+
+                        countFail = countFail + 1
+
+                        if( countFail GTE 5 ){
+
+                            progressBarGeneric.clear()
+
+                            print.redLine('Too many failed attemps, please check dphacks.com for more information')
+
+                            abort;
+
+                        }
+                    }
 
                     progressBarGeneric.update( percent=round(currentCount/numberPendingDeletes*100), currentCount=currentCount, totalCount=numberPendingDeletes );
         
@@ -117,20 +154,22 @@ component {
                         fileWrite( 'tracking.json', serializeJSON( tracking ))
 
                         progressBarGeneric.clear()
-                        sleep(500)
+                        
                         progressBarGeneric.update( percent=round(currentCount/numberPendingDeletes*100), currentCount=currentCount, totalCount=numberPendingDeletes );
-        
-                        sleep(1000)
+                        
+                        // Do not change this sleep. This is to make sure you are not hitting the API rate limit
+                        sleep(901000)
                     }
 
-                    sleep(500)
+                    sleep(200)
                     
                 }
                 
             }
             
         } catch ( java.lang.InterruptedException e ) {
-
+            
+            progressBarGeneric.clear()
             print.redLine('Interrupted!')
             
         } finally{
@@ -141,7 +180,4 @@ component {
         }
     }
 
-    function loadFiles(){
-
-    }
 }
