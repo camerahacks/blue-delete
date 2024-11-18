@@ -20,60 +20,23 @@ You can so by going to ```Settings and privacy > Your account > Download and arc
 
 Here's how I used my Raspberry Pi to delete all my Tweets.
 
-This script requires access to the Twitter API to delete your tweets. You can sign up for the free version through [Twitter's developer portal](https://developer.x.com)
+This script does not require access to the Twitter official API to delete your tweets. Instead, it communicates with Twitter the same way that browser app communicates with TWitter servers.
 
-**BIG OVERSIGHT** Looks like the API there's a limit of 50 deletes per 24 hours. I'll have to find a better way...
+### Tweet Archive
 
-VaenaVgh5q5ih7kvyVjgtg
+Unzip the tweet archive and copy the ```tweets.js``` file to the same folder where you placed this python script. ```tweets.js``` contains the information to all your tweets.
 
-You will also need to install [CommandBox](https://commandbox.ortusbooks.com/setup/installation) to your Raspberry Pi (or any other Linux computer). CommandBox allows you to run a server or a task based on the powerful CFML web scripting language. This script does not require to run a server locally.
+### Browser Session Information
 
-### Install CommandBox
-CommandBox is a standalone tool that lets you run a CFML web server or a script (called tasks) using the powerful CFML web scripting language. The Blue Delete script does not require a web server but it does require a CFML interpreter.
+Login to your Twitter/X account through a web browser on a desktop computer. The instructions below are for Chromium but they should be the same in all browsers.
 
-You can visit [CommandBox's](https://commandbox.ortusbooks.com/setup/installation) website for more information. But I have all the steps needed to install CommandBox on a Raspberry Pi listed below.
+Open your browser developer tools by pressing ```Ctrl + Shift + I``` on the keyboard and go to the ```Network``` tab. This is where you can see all the traffic between your browser (your computer)
+and the network operations it is performing.
 
-CommandBox runs on Mac, Windows, and Linux.
+Still on your Twitter/X page, go to your profile page and choose a single Tweet to delete. Make sure that network traffic is being recorded. The ```record``` button should be red.
 
-Install Dependencies:
+![Record button in developer tools](./media/Record%20Network%20Traffic.png "Record Network Traffic")
 
-```bash
-sudo apt install libappindicator-dev
-```
+Delete the Tweet and press the red ```record``` button to stop recording network traffic.
 
-Add the package repo:
-```bash
-curl -fsSl https://downloads.ortussolutions.com/debs/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/ortussolutions.gpg > /dev/null
-```
-```bash
-echo "deb [signed-by=/usr/share/keyrings/ortussolutions.gpg] https://downloads.ortussolutions.com/debs/noarch /" | sudo tee /etc/apt/sources.list.d/commandbox.list
-```
-Update the package list:
-```nash
-sudo apt update
-```
-```bash
-sudo apt install openjdk-11-jdk
-```
-```bash
-sudo apt install apt-transport-https commandbox
-```
-
-### Sign up for a developer account
-
-Sign in to your Twitter account on a browser and go to the [Twitter/X developer's portal](https://developer.x.com)
-
-Go to the Projects & Apps tab. If there isn't a default project created already for you, create one.
-
-This script uses the OAuth 1.0 method of athentication. 
-
-Next, Setup user authentication and make sure to select Read and write
-
-Go to the Keys and tokes tab. This is where you will generate the access keys needed to delete your tweets. You will only be able to delete your own Tweets.
-These keys and tokes will go in the ```Application.cfc``` file. Be ready to copy this information and save it in a safe location. Do not share this information with anyone else as anyone with access to these keys and tokens can control your account. If you don't copy this information you will have to regenerate them again.
-
-Copy the API Key and the API Secret
-
-Generate a Bearer Token
-
-Generate Access Token and Secret
+Find the entry for 
