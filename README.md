@@ -51,3 +51,30 @@ Time to run the script and delete all your Tweets. **Proceed with caution, there
 
 The script will read all your tweets from the archive, and will make API calls to delete each one of them. It keeps track of tweets that have been deleted in a file called ```tracking.json```.
 If the process is interrupted for some reason, it doesn't have to start from the beginning again.
+
+It will take a 5 minute break after 101 deleted Tweets. I'm sure there is a rate limit on how many calls can be made to the GraphQL API, but I don't know what the limit is. I figured around 100
+or so requests every 5 minutes will fly under the radar. I deleted some 2500 tweets with these settings without running into a rate limit.
+
+If you want to run it faster, just edit these settings:
+```python
+# Take a break after deleting this many Tweets+1
+# This is to prevent hitting any rate limit on the GraphQL API
+pause_after = 100
+
+# Break for how long - in seconds
+pause_length = 300
+```
+
+## FAQ
+
+### I'm just getting a message for Too Many Failed attempts. Does this script work?
+
+Yep, it does work. It probably means your authentication is failing. Follow the steps to copy the cURL request from the web browser and save it to a file names ```curl.txt```
+
+### Will this get me banned from Twitter?
+
+Not that I can tell but proceed at your own risk. It is using an undocumented GraphQL API. The requests look just like deleting a Tweet using Twitter/X through a web browser
+
+### The Script finished but I still have some Tweets left. Can I run the script again?
+
+Yeah, you can run it as many times as you want. Check the ```tracking.json``` file if any Tweets are still pending. All the Tweets marked as deleted will not go through the script again.
