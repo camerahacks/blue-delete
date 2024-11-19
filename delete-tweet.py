@@ -138,7 +138,15 @@ def main():
             count = 0
 
             print("Taking a break. Deleting Tweets will resume shortly")
-            print(str(current_count)+" Tweets deleted. "+str(delete_count-current_count)+" left to go...")
+
+            deletes_left = delete_count-current_count
+            print(str(current_count)+" Tweets deleted. "+str(deletes_left)+" left.")
+
+            save_tracking(tracking)
+
+            time_update = round(deletes_left/100*15/60, 2)
+
+            print("Approximately "+str(time_update)+" more hours to go...")
 
             time.sleep(300)
 
