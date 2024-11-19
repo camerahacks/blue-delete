@@ -10,9 +10,9 @@ If this script was useful to you and you would like to support my work, you can 
 
 ## Step by Step Instructions
 
-Here's how I used my Raspberry Pi to delete all my Tweets. You don't need a Raspberry Pi, though. This is just a Python script.
+Here's how I deleted all my Tweets. You can run this scrip on any machine with Python installed.
 
-This script does not require access to the Twitter official API to delete your tweets. Instead, it communicates with Twitter the same way that browser app communicates with TWitter servers.
+This script does not require access to the Twitter official API to delete your tweets. Instead, it communicates with Twitter the same way that browser app communicates with TWitter servers - trough GraphQL calls.
 
 ## Download your Twitter/X Archive
 
