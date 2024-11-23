@@ -17,10 +17,10 @@ endpoint = "https://twitter.com/i/api/graphql/VaenaVgh5q5ih7kvyVjgtg/DeleteTweet
 
 # Take a break after deleting this many Tweets+1
 # This is to prevent hitting any rate limit on the GraphQL API
-pause_after = 100
+pause_after = 150
 
 # Break for how long - in seconds
-pause_length = 300
+pause_length = 150
 
 
 #####
