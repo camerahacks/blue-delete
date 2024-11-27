@@ -17,7 +17,7 @@ endpoint = "https://twitter.com/i/api/graphql/VaenaVgh5q5ih7kvyVjgtg/DeleteTweet
 
 # Take a break after deleting this many Tweets+1
 # This is to prevent hitting any rate limit on the GraphQL API
-pause_after = 150
+pause_after = 200
 
 # Break for how long - in seconds
 pause_length = 150
@@ -171,7 +171,7 @@ def main():
 
             print("Approximately "+str(time_update)+" hour(s) to go...")
 
-            time.sleep(300)
+            time.sleep(pause_length)
 
 # Let's GOOOOOO!
 try:
