@@ -59,10 +59,10 @@ If you want to run it faster, just edit these settings:
 ```python
 # Take a break after deleting this many Tweets+1
 # This is to prevent hitting any rate limit on the GraphQL API
-pause_after = 100
+pause_after = 200
 
 # Break for how long - in seconds
-pause_length = 300
+pause_length = 150
 ```
 
 ## FAQ
